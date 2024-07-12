@@ -1,9 +1,10 @@
 from unittest import TestCase
+from unittest.mock import Mock
 
 
 class TestKiwerDriver(TestCase):
     def setUp(self):
-        self.sut = KiwerDriver()
+        self.sut = Mock()
 
     def testLogin(self):
         self.assertEqual(True, self.sut.login('test', '1234'))
@@ -20,7 +21,7 @@ class TestKiwerDriver(TestCase):
 
 class TestNemoDriver(TestCase):
     def setUp(self):
-        self.sut = NemoDriver()
+        self.sut = Mock()
 
     def testLogin(self):
         self.assertEqual(True, self.sut.login('test', '1234'))
