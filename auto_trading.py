@@ -24,8 +24,7 @@ class AutoTrading:
             current_price = self.get_price(ticker)
             if current_price < prev_price:
                 return
-        return self.buy(ticker, price, 1) # TODO: need to check balance
-
+        return self.buy(ticker, price, 1)  # TODO: need to check balance
 
     def sell_nice_timing(self, ticker, shares):
         current_price = self.get_price(ticker)
