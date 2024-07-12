@@ -1,15 +1,21 @@
 class AutoTrading:
+    def __init__(self):
+        self.__broker = None
+
+    def select_stock_broker(self, broker):
+        self.__broker = broker
+
     def login(self, id, password):
-        pass
+        return self.__broker.login(id, password)
 
     def buy(self, ticker, price, shares):
-        pass
+        return self.__broker.buy(ticker, price, shares)
 
     def sell(self, ticker, price, shares):
-        pass
+        return self.__broker.sell(ticker, price, shares)
 
     def get_price(self, ticker):
-        pass
+        return self.__broker.get_price(ticker)
 
     def buy_nice_timing(self, ticker, price):
         pass
