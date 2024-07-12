@@ -4,7 +4,7 @@ from kiwer_api import KiwerAPI
 from nemo_api import NemoAPI
 
 
-class AutoTrading(TestCase):
+class TestAutoTrading(TestCase):
 
     def testSelectWrongStockBroker(self):
         pass
