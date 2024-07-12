@@ -33,6 +33,7 @@ class TestAutoTrading(TestCase):
 
     def test_buy(self):
         self.driver.buy.return_value = True
+        self.driver.get_price.return_value = 500
         self.assertEqual(True, self.sut.buy(get_random_code(), 500, 10))
 
     def test_buy_with_wrong_code(self):
@@ -42,11 +43,15 @@ class TestAutoTrading(TestCase):
 
     def test_buy_fail_cause_expensive(self):
         self.driver.buy.return_value = True
+        self.driver.get_price.return_value = 1000001
         self.assertEqual(False, self.sut.buy(get_random_code(), 1000001, 1))
 
     def test_sell(self):
+        ticker = get_random_code()
         self.driver.sell.return_value = True
-        self.assertEqual(True, self.sut.sell(get_random_code(), 700, 5))
+        self.driver.get_price.return_value = 500
+        self.sut.buy(ticker, 700, 5)
+        self.assertEqual(True, self.sut.sell(ticker, 700, 5))
 
     def test_sell_with_wrong_code(self):
         self.driver.sell.return_value = True

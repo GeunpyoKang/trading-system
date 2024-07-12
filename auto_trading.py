@@ -1,16 +1,10 @@
 from collections import defaultdict
 
 
-class UserAsset:
-    def __init__(self):
-        self.cash = 1000000
-        self.stock = defaultdict(int)
-
-
 class AutoTrading:
     def __init__(self):
         self.__broker = None
-        self.__cach = 1000000
+        self.__cache = 1000000
         self.__stocks = defaultdict(int)
 
     def select_stock_broker(self, broker):
@@ -20,10 +14,26 @@ class AutoTrading:
         return self.__broker.login(id, password)
 
     def buy(self, ticker, price, shares):
-        return self.__broker.buy(ticker, price, shares)
+        if self.get_price(ticker) * shares > self.__cache:
+            return False
+        if not self.__broker.buy(ticker, price, shares):
+            return False
+        if ticker not in self.__stocks:
+            self.__stocks[ticker] = 0
+        self.__stocks[ticker] += shares
+        self.__cache -= self.get_price(ticker) * shares
+        return True
 
     def sell(self, ticker, price, shares):
-        return self.__broker.sell(ticker, price, shares)
+        if ticker not in self.__stocks:
+            return False
+        if self.__stocks[ticker] < shares:
+            return False
+        if not self.__broker.sell(ticker, price, shares):
+            return False
+        self.__stocks[ticker] -= shares
+        self.__cache += self.get_price(ticker) * shares
+        return True
 
     def get_price(self, ticker):
         return self.__broker.get_price(ticker)
@@ -47,6 +57,18 @@ class AutoTrading:
         return self.sell(ticker, current_price, shares)
 
     def get_asset(self):
+        return self.__cache, self.__get_value_of_stocks()
+
+    def __get_value_of_stocks(self):
+        value = 0
+        for stock_name, shares in self.__stocks.items():
+            value += self.get_price(stock_name) * shares
+        return value
+
+
+
+###
+    def get_asset(self):
         stock_price = 0
         for stock_code, quantity in self.__stocks:
             stock_price += self.get_price(stock_code) * self.get_stock_quantity(stock_code)
@@ -55,6 +77,7 @@ class AutoTrading:
     def get_stock_quantity(self, stock_code):
         return self.__stocks[stock_code]
 
+###
     def is_valid_stock_code(self, stock_code):
         if not (6 <= len(stock_code) <= 7):
             raise Exception()
