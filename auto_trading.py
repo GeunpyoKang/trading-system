@@ -1,6 +1,17 @@
+from collections import defaultdict
+
+
+class UserAsset:
+    def __init__(self):
+        self.cash = 1000000
+        self.stock = defaultdict(int)
+
+
 class AutoTrading:
     def __init__(self):
         self.__broker = None
+        self.__cach = 1000000
+        self.__stocks = defaultdict(int)
 
     def select_stock_broker(self, broker):
         self.__broker = broker
@@ -34,3 +45,27 @@ class AutoTrading:
             if current_price > prev_price:
                 return
         return self.sell(ticker, current_price, shares)
+
+    def get_asset(self):
+        stock_price = 0
+        for stock_code, quantity in self.__stocks:
+            stock_price += self.get_price(stock_code) * self.get_stock_quantity(stock_code)
+        return self.__cash, stock_price
+
+    def get_stock_quantity(self, stock_code):
+        return self.__stocks[stock_code]
+
+    def is_valid_stock_code(self, stock_code):
+        if not (6 <= len(stock_code) <= 7):
+            raise Exception()
+
+        if len(stock_code) == 7:
+            if stock_code[0] not in ('A', 'B', 'C', 'K'):
+                raise Exception()
+            stock_code = stock_code[1:]
+
+        if len(stock_code) == 6:
+            if not ('000000' <= str(stock_code) <= '999999'):
+                raise Exception()
+
+        return True
