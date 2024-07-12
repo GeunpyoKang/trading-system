@@ -18,6 +18,13 @@ class AutoTrading(TestCase):
     def testSelectNemoStockBroker(self):
         pass
 
+    def testLoginWithInvalidID(self):
+        pass
 
+    def testLoginWithInvalidPassword(self):
+        pass
+
+    def testLoginWithValidPassword(self):
+        pass
 
 
