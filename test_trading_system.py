@@ -14,25 +14,23 @@ class TestAutoTrading(TestCase):
 
     def test_select_stock_broker(self):
         self.sut.select_stock_broker(self.driver)
+
     def test_login(self):
         self.driver.login.return_value = True
 
         self.assertEqual(True, self.sut.login('test', '1234'))
 
     def test_buy(self):
-        # Mocking Code
         self.driver.buy.return_value = True
 
         self.assertEqual(True, self.sut.buy('ABC123', 500, 10))
 
     def test_sell(self):
-        # Mocking Code
         self.driver.sell.return_value = True
 
         self.assertEqual(True, self.sut.sell('ABC123', 700, 5))
 
     def test_get_price(self):
-        # Mocking Code
         self.driver.get_price.return_value = 500
 
         self.assertEqual(500, self.sut.get_price('ABC123'))
