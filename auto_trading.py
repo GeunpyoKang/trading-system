@@ -18,7 +18,20 @@ class AutoTrading:
         return self.__broker.get_price(ticker)
 
     def buy_nice_timing(self, ticker, price):
-        pass
+        current_price = self.get_price(ticker)
+        for _ in range(2):
+            prev_price = current_price
+            current_price = self.get_price(ticker)
+            if current_price < prev_price:
+                return
+        return self.buy(ticker, price, 1) # TODO: need to check balance
+
 
     def sell_nice_timing(self, ticker, shares):
-        pass
+        current_price = self.get_price(ticker)
+        for _ in range(2):
+            prev_price = current_price
+            current_price = self.get_price(ticker)
+            if current_price > prev_price:
+                return
+        return self.sell(ticker, current_price, shares)
