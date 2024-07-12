@@ -65,19 +65,7 @@ class AutoTrading:
             value += self.get_price(stock_name) * shares
         return value
 
-
-
-###
-    def get_asset(self):
-        stock_price = 0
-        for stock_code, quantity in self.__stocks:
-            stock_price += self.get_price(stock_code) * self.get_stock_quantity(stock_code)
-        return self.__cash, stock_price
-
-    def get_stock_quantity(self, stock_code):
-        return self.__stocks[stock_code]
-
-###
+    ###
     def is_valid_stock_code(self, stock_code):
         if not (6 <= len(stock_code) <= 7):
             raise Exception()
