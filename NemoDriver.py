@@ -4,16 +4,20 @@ from nemo_api import NemoAPI
 
 class NemoDriver(IStockBrokerDriver):
     def __init__(self):
-        self.__driver = NemoAPI()
+        self.driver = NemoAPI()
 
     def login(self, id: str, password: str):
-        self.__driver.cerification(id, password)
+        try:
+            self.driver.cerification(id, password)
+            return True
+        except:
+            return False
 
     def buy(self, stock_code: str, price: int, amount: int):
-        self.__driver.purchasing_stock(stock_code, price, amount)
+        self.driver.purchasing_stock(stock_code, price, amount)
 
     def sell(self, stock_code: str, price: int, amount: int):
-        self.__driver.selling_stock(self, stock_code, price, amount)
+        self.driver.selling_stock(stock_code, price, amount)
 
     def get_price(self, stock_code: str):
-        self.__driver.get_market_price(self, stock_code, 0)
+        self.driver.get_market_price(stock_code, 0)
