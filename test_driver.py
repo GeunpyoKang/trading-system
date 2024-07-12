@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import Mock
 
-from NemoDriver import NemoDriver
+from nemo_driver import NemoDriver
 
 
 class TestKiwerDriver(TestCase):
