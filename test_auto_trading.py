@@ -23,17 +23,6 @@ class TestAutoTrading(TestCase):
     def test_sell_nice_timing(self):
         pass
 
-    def testSelectWrongStockBroker(self):
-        pass
-
-    def testSelectKiwerStockBroker(self):
-        pass
-
-    def testSelectNemoStockBroker(self):
-        pass
-
-    def testSelectMockStockBroker(self):
-        pass
     #
     # def testLoginWithInvalidID(self):
     #     pass
