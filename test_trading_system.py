@@ -43,7 +43,7 @@ class TestAutoTrading(TestCase):
         self.driver.sell.return_value = True
         self.assertEqual(True, self.sut.sell(get_random_code(), 700, 5))
 
-    def test_sell(self):
+    def test_sell_with_wrong_code(self):
         self.driver.sell.return_value = True
         self.assertEqual(True, self.sut.sell(WRONG_CODE, 700, 5))
 
