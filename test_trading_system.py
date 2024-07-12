@@ -38,16 +38,12 @@ class TestAutoTrading(TestCase):
         self.assertEqual(500, self.sut.get_price('ABC123'))
 
     def test_buy_nice_timing(self):
-        # Mocking Code
-        self.driver.buy()
 
         self.driver.get_price.side_effect = [100, 110, 150]
         self.sut.buy_nice_timing('ABC123', 500)
         self.assertEqual(1, self.driver.buy.call_count)
 
     def test_sell_nice_timing(self):
-        # Mocking Code
-        self.driver.sell()
 
         self.driver.get_price.side_effect = [150, 110, 100]
         self.sut.sell_nice_timing('ABC123', 3)
