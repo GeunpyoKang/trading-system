@@ -1,8 +1,19 @@
+import random
 from unittest import TestCase
 from unittest.mock import Mock
 
 from auto_trading import AutoTrading
 from stock_broker_driver import IStockBrokerDriver
+
+WRONG_CODE = 'ABCDEFG'
+
+
+def get_random_code():
+    pre_fixes = ['A', 'B', 'C', 'K']
+    rand_ind = random.randint(0, 3)
+    rand_num = random.randint(0, 999999)
+    rand_num_str = '{:06}'.format(rand_num)
+    return pre_fixes[rand_ind] + rand_num_str
 
 
 class TestAutoTrading(TestCase):
@@ -22,13 +33,19 @@ class TestAutoTrading(TestCase):
 
     def test_buy(self):
         self.driver.buy.return_value = True
+        self.assertEqual(True, self.sut.buy(get_random_code(), 500, 10))
 
-        self.assertEqual(True, self.sut.buy('ABC123', 500, 10))
+    def test_buy_with_wrong_code(self):
+        self.driver.buy.return_value = True
+        self.assertEqual(True, self.sut.buy(WRONG_CODE, 500, 10))
 
     def test_sell(self):
         self.driver.sell.return_value = True
+        self.assertEqual(True, self.sut.sell(get_random_code(), 700, 5))
 
-        self.assertEqual(True, self.sut.sell('ABC123', 700, 5))
+    def test_sell(self):
+        self.driver.sell.return_value = True
+        self.assertEqual(True, self.sut.sell(WRONG_CODE, 700, 5))
 
     def test_get_price(self):
         self.driver.get_price.return_value = 500
