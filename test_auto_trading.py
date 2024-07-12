@@ -2,17 +2,22 @@ from unittest import TestCase
 
 from kiwer_api import KiwerAPI
 from nemo_api import NemoAPI
+from stock_broker_driver import StockBrokerDriver
 
 
 class AutoTrading(TestCase):
     def setUp(self):
         self.kiwer = KiwerAPI()
         self.nemo = NemoAPI()
+        self.stock_broker_driver = StockBrokerDriver()
 
     def testSelectWrongStockBroker(self):
         pass
 
     def testSelectKiwerStockBroker(self):
+        pass
+
+    def testSelectMockStockBroker(self):
         pass
 
     def testSelectNemoStockBroker(self):
@@ -27,4 +32,11 @@ class AutoTrading(TestCase):
     def testLoginWithValidPassword(self):
         pass
 
+    def testBuyWithInvalidParameter(self):
+        pass
 
+    def testSuccessfulBuy(self):
+        pass
+
+    def testFailBuy(self):
+        pass

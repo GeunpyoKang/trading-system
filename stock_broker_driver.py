@@ -1,0 +1,2 @@
+class StockBrokerDriver:
+    pass
