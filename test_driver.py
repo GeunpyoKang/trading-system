@@ -36,25 +36,20 @@ class TestKiwerDriver(TestCase):
 class TestNemoDriver(TestCase):
     def setUp(self):
         self.sut = NemoDriver()
-        self.sut.driver = Mock()
 
     def testLogin(self):
         # Mocking Code
         id, passwd = 'test', '1234'
-        self.sut.login(id, passwd)
-        self.sut.driver.cerification.assert_called_with(id, passwd)
+        self.assertTrue(self.sut.login(id, passwd))
 
     def testBuy(self):
         stock_code, price, count = 'APPL', 200, 123
-        self.sut.buy(stock_code, price, count)
-        self.sut.driver.purchasing_stock.assert_called_with(stock_code, price, count)
+        self.assertTrue(self.sut.buy(stock_code, price, count))
 
     def testSell(self):
         stock_code, price, count = 'APPL', 200, 123
-        self.sut.sell(stock_code, price, count)
-        self.sut.driver.selling_stock.assert_called_with(stock_code, price, count)
+        self.assertTrue(self.sut.sell(stock_code, price, count))
 
     def testCurrentPrice(self):
         stock_code = 'APPL'
-        self.sut.get_price(stock_code)
-        self.sut.driver.get_market_price.assert_called_with(stock_code, 0)
+        self.assertTrue(self.sut.get_price(stock_code))

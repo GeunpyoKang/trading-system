@@ -1,4 +1,4 @@
-from IStockBrokerDriver import IStockBrokerDriver
+from stock_broker_driver import IStockBrokerDriver
 from nemo_api import NemoAPI
 
 
@@ -14,10 +14,22 @@ class NemoDriver(IStockBrokerDriver):
             return False
 
     def buy(self, stock_code: str, price: int, amount: int):
-        self.driver.purchasing_stock(stock_code, price, amount)
+        try:
+            self.driver.purchasing_stock(stock_code, price, amount)
+            return True
+        except:
+            return False
 
     def sell(self, stock_code: str, price: int, amount: int):
-        self.driver.selling_stock(stock_code, price, amount)
+        try:
+            self.driver.selling_stock(stock_code, price, amount)
+            return True
+        except:
+            return False
 
     def get_price(self, stock_code: str):
-        self.driver.get_market_price(stock_code, 0)
+        try:
+            self.driver.get_market_price(stock_code, 0)
+            return True
+        except:
+            return False
